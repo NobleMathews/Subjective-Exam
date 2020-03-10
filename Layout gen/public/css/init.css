@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600");
+@import url("stdCheckbox.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: white;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+#root{
+display: inline-block;
+}
+#canvas {
+     background-color: #FBFBFB; 
+    }
+#settings { 
+    width: 12em; padding: 1em; display: inline-block; float: left; border: 1px solid #999; background-color: #EEE; 
+}
+
+.container {
+    width: 1170px;
+    overflow: auto;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 30px;
+  }
+
+  .container table {
+    margin-top: 40px;
+    border-collapse: collapse;
+    border: 3px solid #404040;
+    width: 100%;
+  }
+  .container table .totalTR {
+    text-align: left;
+    font-size: 20px;
+    padding: 7px 10px;
+  }
+  .container table .totalTr {
+    background: #000 !important;
+    font-size: 19px;
+    color: #f9e01f;
+  }
+  .container table .totalTr .totalText {
+    padding-left: 10px;
+  }
+  .container table .checkTh {
+    width: 38px;
+  }
+  .container table .checkTd {
+    padding-left: 10px;
+  }
+  .container table th {
+    font-weight: 400;
+    font-size: 18px;
+    background-color: #f9e01f;
+    color: #404040;
+    padding: 15px;
+  }
+  .container table th, .container table td {
+    text-align: left;
+  }
+  .container table .flexcenter {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+  }
+  .container table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .container table .numberi {
+    width: 100px !important;
+  }
+  .container table td {
+    padding: 5px;
+  }
+  .container table td input {
+    border: none;
+    width: 85%;
+    max-width: 350px;
+    background: rgba(0, 0, 0, 0.04);
+    font-size: 15px;
+    padding: 8px 8px;
+    margin: 3px 5px;
+    border-left: 3px solid transparent;
+  }
+  .container table td input:focus {
+    outline: solid;
+  }
+  .container table .total {
+    text-align: right;
+    font-weight: 500;
+    padding: 0 14px;
+  }
+  .container button {
+    margin-top: 20px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    color: #333;
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    background: #f9e01f;
+    line-height: 35px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-right: 20px;
+    border-radius: 3px;
+  }
+  .container button:hover {
+    box-shadow: 0 10px 25px -7px rgba(0, 0, 0, 0.4);
+    -webkit-transform: translatey(-3px);
+            transform: translatey(-3px);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .container button:focus {
+    outline: none;
+  }
