@@ -1,8 +1,14 @@
 mcanvas=$('#canvas')[0];
 mdraw=mcanvas.getContext("2d");
-// var img = new Image();
-var nofit=[];
 
+var nofit=[];
+var blocks;
+var nu=1;
+var carry=0;
+var qc=1;
+var linebreak = document.createElement("br");
+
+// var img = new Image();
 // img.src = 'seam.png';
 // img.onload = function(){
 //   // create pattern
@@ -13,23 +19,12 @@ var nofit=[];
 
 // run();
 function run(typ){
-    var blocks = [
-        { w: 600, h: 600 },
-        { w:  600, h:  300 },
-        { w:  300, h: 300 },
-        { w: 600, h: 150 },
-        { w: 300, h: 150 },
-        { w: 600, h: 600 },
-        { w:  600, h:  300 },
-        { w:  300, h: 300 },
-        { w: 600, h: 150 },
-        { w: 300, h: 150 },
-        { w: 600, h: 600 },
-        { w:  600, h:  300 },
-        { w:  300, h: 300 },
-        { w: 600, h: 150 },
-        { w: 300, h: 150 }          
-      ];
+  if(carry==0)
+    qc=1;
+  else qc= carry;
+  nofit=[];
+  blocks=typ;
+    
     packer=new Mosaic();
     packer.answersheet(blocks);
     mcanvas.width=packer.currPos.w+1;
@@ -43,16 +38,17 @@ function run(typ){
             mdraw.font = "30px Arial";
             mdraw.fillStyle=color(x);
             // mdraw.fillRect(block.fit.x + 0.5, block.fit.y + 0.5, block.w, block.h);
-            mdraw.fillText(x+1, block.fit.x + 5, block.fit.y + 30);
+            mdraw.fillText(qc++, block.fit.x + 5, block.fit.y + 30);
 
         }
         else
-        // nofit.push("" + block.w + "x" + block.h);
-        nofit.push([block.w,block.h]);
+        nofit.push("" + block.w + "x" + block.h);
+        // nofit.push([block.w,block.h]);
 
       }
-      if(nofit.length>0){
-        //use the nofit elements and restart
+      if(nofit.length!=0){
+        run(reprocess(nofit));
+
       }
 }
 function stroke(x, y, w, h) {
@@ -71,4 +67,33 @@ function color(n) {
     // var clr = [ "#FFF7A5", "#FFA5E0", "#A5B3FF", "#BFFFA5", "#FFCBA5" ];
     // return clr[n % cols.length];
     return "black";
+  }
+function reprocess(blocks) {
+    carry=qc;
+    var i, j, block, result = [];
+    for(i = 0 ; i < blocks.length ; i++) {
+      block = blocks[i].split("x");
+      if (block.length >= 2)
+        result.push({w: parseInt(block[0]), h: parseInt(block[1]), num: (block.length == 2 ? 1 : parseInt(block[2])) });
+    }
+    var expanded = [];
+    for(i = 0 ; i < result.length ; i++) {
+      for(j = 0 ; j < result[i].num ; j++)
+        expanded.push({w: result[i].w, h: result[i].h});}
+        var canvas = document.createElement('canvas');
+
+          canvas.id = "canvas"+nu;
+          nu++;
+          canvas.width = 1000;
+          canvas.height = 1414;
+          canvas.style.position = "absolute";
+          canvas.style.border = "1px solid";
+          // var body = document.getElementsByTagName("body")[0];
+          
+        document.body.appendChild(linebreak);
+        document.body.appendChild(canvas);
+        
+    mcanvas=canvas;
+    mdraw=canvas.getContext("2d");
+    return expanded;
   }
