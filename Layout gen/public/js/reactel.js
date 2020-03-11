@@ -1,6 +1,23 @@
 var allQuestions = new Array();
 var status =1;
 var typOfBoxes = new Array(7);
+var blocks = [
+  // { w: 600, h: 600 },
+  // { w:  600, h:  300 },
+  // { w:  300, h: 300 },
+  // { w: 600, h: 150 },
+  // { w: 300, h: 150 },
+  // { w: 600, h: 600 },
+  // { w:  600, h:  300 },
+  // { w:  300, h: 300 },
+  // { w: 600, h: 150 },
+  // { w: 300, h: 150 },
+  // { w: 600, h: 600 },
+  // { w:  600, h:  300 },
+  // { w:  300, h: 300 },
+  // { w: 600, h: 150 },
+  // { w: 300, h: 150 }          
+];
 
 var ListItem = React.createClass({ displayName: "ListItem",
   getInitialState: function () {
@@ -108,20 +125,41 @@ var Table = React.createClass({ displayName: "Table",
   updateGlobalTotal: function () {
     var total = 0;
     status=0;
-    typOfBoxes=[0,0,0,0,0,0,0];
+    // typOfBoxes=[0,0,0,0,0,0,0];
+    blocks=[];
     for (var i = 0; i < this.props.ids; i++) {
       {total += allQuestions[i];
         if(allQuestions[i]!=0){status++;}
       }
-      console.log(allQuestions[i]);
       if(allQuestions[i]!=NaN)
-      typOfBoxes[allQuestions[i]]+=1;
+      
+      switch (allQuestions[i]){
+        case 1:
+          blocks.push({w: 300, h: 150});
+          break;
+        case 2:
+          blocks.push({w: 600, h: 150});
+          break;
+        case 3:
+          blocks.push({w: 300, h: 300});
+          break;
+        case 4:
+          blocks.push({w: 600, h: 300});
+          break;
+        case 5:
+          blocks.push({w: 600, h: 600});
+          break;
+        case 6:
+          blocks.push({w: 800, h: 800});
+          break;
+        
+      }
     }
-        console.log(typOfBoxes);
-    
+    console.log(blocks);
+    //reupdate blocks based on number of occurences here    
     this.setState({ totale: total });
     $.getScript("index.js",function(){
-        run(typOfBoxes);
+        run(blocks);
         });
   } });
 
