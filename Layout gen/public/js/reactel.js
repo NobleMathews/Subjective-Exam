@@ -176,15 +176,15 @@ var AddNewRow = React.createClass({ displayName: "AddNewRow",
   } });
 
 
-var Save = React.createClass({ displayName: "Save",
-  render: function () {
-    return (
-      React.createElement("div", null,
-      React.createElement("button", { onClick: this.props.onClick }, "S"), "Save"));
+// var Save = React.createClass({ displayName: "Save",
+//   render: function () {
+//     return (
+//       React.createElement("div", null,
+//       React.createElement("button", { onClick: this.props.onClick }, "S"), "Save"));
 
 
 
-  } });
+//   } });
 
 
 var Calculator = React.createClass({ displayName: "Calculator",
@@ -199,7 +199,8 @@ var Calculator = React.createClass({ displayName: "Calculator",
       React.createElement("div", { className: "container" },
       React.createElement(Table, { items: this.state.lists, ids: this.state.counter }),
       React.createElement(AddNewRow, { onClick: this.addRow }),
-      React.createElement(Save, { onClick: this.saveStat })));
+      // React.createElement(Save, { onClick: this.saveStat })
+      ));
 
 
   },
@@ -211,15 +212,16 @@ var Calculator = React.createClass({ displayName: "Calculator",
     this.setState({ lists: allItem });
   },
 
-  saveStat: function () {
-    var _this2 = this;
-    $.ajax({
-      type: "POST",
-      url: "saveJson.php",
-      dataType: 'json',
-      data: { json: _this2.state.lists } });
+  // saveStat: function () {
+  //   var _this2 = this;
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "saveJson.php",
+  //     dataType: 'json',
+  //     data: { json: _this2.state.lists } });
 
-  } });
+  // } 
+});
 
 
 
