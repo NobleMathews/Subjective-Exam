@@ -9,6 +9,7 @@
 html, body {
   background: white;
   font-family: 'Montserrat', Helvetica, sans-serif;
+  margin:30px;
 }
 #root{
 display: inline-block;
@@ -26,7 +27,6 @@ display: inline-block;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 20px;
-    margin: 30px;
   }
 
   .container table {
