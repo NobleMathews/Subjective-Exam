@@ -5,7 +5,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+*:before,
+*:after {
+   -webkit-box-sizing: content-box !important;
+   -moz-box-sizing: content-box !important;
+   box-sizing: content-box !important;
+}
 html, body {
   background: white;
   font-family: 'Montserrat', Helvetica, sans-serif;
