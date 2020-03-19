@@ -129,7 +129,7 @@ function reprocess(blocks) {
     }
     pdf.setPage(i+1);
       let imgData = canvas.toDataURL("image/jpeg", 1.0);
-      pdf.addImage(imgData, 'JPEG', 0, 0);
+      pdf.addImage(imgData, 'JPEG', 0, 0,1001,1415);
       i++;
     });
     pdf.save("download.pdf");
