@@ -132,5 +132,5 @@ function reprocess(blocks) {
       pdf.addImage(imgData, 'JPEG', 0, 0,1001,1415);
       i++;
     });
-    pdf.save("download.pdf");
+    pdf.save("AnswerLayout.pdf");
   },false);
