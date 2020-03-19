@@ -155,12 +155,12 @@ var Table = React.createClass({ displayName: "Table",
         
       }
     }
-    console.log(blocks);
+    // console.log(blocks);
     //reupdate blocks based on number of occurences here    
     this.setState({ totale: total });
-    $.getScript("index.js",function(){
-        run(blocks);
-        });
+    // $.getScript("index.js",function(){
+    //     run(blocks,1);
+    //     });
   } });
 
 
@@ -176,15 +176,15 @@ var AddNewRow = React.createClass({ displayName: "AddNewRow",
   } });
 
 
-// var Save = React.createClass({ displayName: "Save",
-//   render: function () {
-//     return (
-//       React.createElement("div", null,
-//       React.createElement("button", { onClick: this.props.onClick }, "S"), "Save"));
+var Run = React.createClass({ displayName: "Run",
+  render: function () {
+    return (
+      React.createElement("div", null,
+      React.createElement("button", { onClick: this.props.onClick }, "R"), "Run"));
 
 
 
-//   } });
+  } });
 
 
 var Calculator = React.createClass({ displayName: "Calculator",
@@ -199,7 +199,7 @@ var Calculator = React.createClass({ displayName: "Calculator",
       React.createElement("div", { className: "container" },
       React.createElement(Table, { items: this.state.lists, ids: this.state.counter }),
       React.createElement(AddNewRow, { onClick: this.addRow }),
-      // React.createElement(Save, { onClick: this.saveStat })
+      React.createElement(Run, { onClick: this.runs })
       ));
 
 
@@ -220,7 +220,12 @@ var Calculator = React.createClass({ displayName: "Calculator",
   //     dataType: 'json',
   //     data: { json: _this2.state.lists } });
 
-  // } 
+  // }
+  runs: function(){
+    $.getScript("index.js",function(){
+      run(blocks,1);
+      });
+  } 
 });
 
 
