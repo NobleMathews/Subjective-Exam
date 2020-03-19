@@ -7,6 +7,8 @@ var nu=1;
 var carry=0;
 var qc=1;
 var linebreak = document.createElement("br");
+var download=document.getElementById("download");
+var lastrun=1;
 
 // var img = new Image();
 // img.src = 'seam.png';
@@ -18,7 +20,23 @@ var linebreak = document.createElement("br");
 // }
 
 // run();
-function run(typ){
+function run(typ,runtyp){
+  if(runtyp==1){
+    let canvases =Array.from(document.getElementsByTagName("canvas"));
+    canvases.forEach(canvas => {
+    //   eraser=canvas.getContext("2d");
+    //   eraser.fillStyle="#FFFFFF";
+    // eraser.fillRect(0 , 0 , mcanvas.width, mcanvas.height);
+    if(canvas.id!="canvas"){
+      canvas.parentNode.removeChild(canvas);
+    }
+   
+    });
+    carry=0;
+    mcanvas=$('#canvas')[0];
+    mdraw=mcanvas.getContext("2d");
+    nu=1;
+  }
   if(carry==0)
     qc=1;
   else qc= carry;
@@ -30,6 +48,8 @@ function run(typ){
     mcanvas.width=packer.currPos.w+1;
     mcanvas.height=packer.currPos.h+1;
     mdraw.clearRect(0, 0,mcanvas.width,mcanvas.height);
+    mdraw.fillStyle="#FFFFFF";
+    mdraw.fillRect(0 , 0 , mcanvas.width, mcanvas.height);
     boundary(packer.currPos);
 
     for (var x = 0 ; x < blocks.length ; x++) {
@@ -47,7 +67,7 @@ function run(typ){
 
       }
       if(nofit.length!=0){
-        run(reprocess(nofit));
+        run(reprocess(nofit),0);
 
       }
 }
@@ -80,20 +100,37 @@ function reprocess(blocks) {
     for(i = 0 ; i < result.length ; i++) {
       for(j = 0 ; j < result[i].num ; j++)
         expanded.push({w: result[i].w, h: result[i].h});}
-        var canvas = document.createElement('canvas');
-
+        var canvas = document.getElementById("canvas"+nu);
+        if(canvas == null)
+        {canvas = document.createElement('canvas');
+          
           canvas.id = "canvas"+nu;
-          nu++;
+          nu=nu+1;
           canvas.width = 1000;
           canvas.height = 1414;
-          canvas.style.position = "absolute";
+          canvas.style.position = "relative";
           canvas.style.border = "1px solid";
-          // var body = document.getElementsByTagName("body")[0];
           
-        document.body.appendChild(linebreak);
         document.body.appendChild(canvas);
-        
+        document.body.appendChild(linebreak);
+        // document.body.appendChild(canvas);
+      }
     mcanvas=canvas;
     mdraw=canvas.getContext("2d");
     return expanded;
   }
+  download.addEventListener("click", function() {
+    let i=0;
+    var pdf = new jsPDF('p', 'px', [1415, 1001]);
+    let canvases =Array.from(document.getElementsByTagName("canvas"));
+    canvases.forEach(canvas => {
+      if (i > 0) {
+        pdf.addPage(); 
+    }
+    pdf.setPage(i+1);
+      let imgData = canvas.toDataURL("image/jpeg", 1.0);
+      pdf.addImage(imgData, 'JPEG', 0, 0);
+      i++;
+    });
+    pdf.save("download.pdf");
+  },false);
