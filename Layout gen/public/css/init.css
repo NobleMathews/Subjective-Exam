@@ -25,7 +25,26 @@ display: inline-block;
 #settings { 
     width: 12em; padding: 1em; display: inline-block; float: left; border: 1px solid #999; background-color: #EEE; 
 }
-
+/* input[name="splitm"] {
+  width: 60px !important;
+} */
+input[name="weight"] {
+  width: 150px !important;
+}
+textarea {
+  background: rgba(0, 0, 0, 0.04);
+  width: 100%;
+  width: -moz-available;          /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  width: fill-available;
+}
+/* input[name="com"] {
+  width: "" !important;
+}
+button[name="addsplit"] {
+  margin-top: 0px !important;
+  margin-right: 0px !important;
+} */
 .container {
     width: 1170px;
     overflow: auto;
