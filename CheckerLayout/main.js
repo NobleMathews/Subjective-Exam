@@ -43,17 +43,22 @@ var gradeSheet = new function () {
         // An array of JSON objects with values.
         this.header = [{ 'Marks': '', 'Comments': '', 'Check form': ''}]
         this.col = [];
-        $.get('http://127.0.0.1:3000/ms',  // url
-        function (data, textStatus, jqXHR) {  // success callback
-          alert('status: ' + textStatus + ', data:' + data);
-        });
-        // const APIURL = "http://localhost:3000";
-        // const getquestions = async () => {
-        // const res = await fetch(`${APIURL}/ms`);
-        // this.header=res.json();
-        // this.createTable();
-        // };
-        // getquestions();
+        var url='http://127.0.0.1:3000/ms';
+        $.ajax({
+            url: url,
+            dataType: "json",
+            type:'GET',
+            crossDomain:true,
+            contentType:"application/json",
+            success:function (data) {
+                
+                data[0].gstring.forEach(element => {
+                    gradeSheet.header.push(element);
+                });
+                gradeSheet.createTable();
+              }
+          });
+
         
         this.createTable = function () {
             for (var i = 0; i < this.header.length; i++) {
@@ -87,7 +92,7 @@ var gradeSheet = new function () {
                     var tabCell = tr.insertCell(-1);
                     tabCell.innerHTML = this.header[i][this.col[j]];
                     if(j==2){
-                      if(String(this.header[i][this.col[j]])!="N.A."){
+                      if(String(this.header[i][this.col[j]])=="N.A."){
                         tabCell.innerHTML ='<input type="checkbox" value="yes" checked="true" id="isGraded3">'
                       }
                       else
@@ -96,8 +101,6 @@ var gradeSheet = new function () {
                     
                 }
             }
-            console.log(this.header);
-
             tr = table.insertRow(-1);           // Create the last row.
 
             for (var j = 0; j < this.col.length; j++) {
@@ -148,7 +151,7 @@ var gradeSheet = new function () {
             obj[this.col[0]] = '';
 
             // Add new values to header array.
-            for (i = 1; i < this.col.length; i++) {
+            for (i = 0; i < this.col.length; i++) {
 
                 var td = tab.getElementsByTagName("td")[i];
                 if (td.childNodes[0].getAttribute('type') == 'text' || 
